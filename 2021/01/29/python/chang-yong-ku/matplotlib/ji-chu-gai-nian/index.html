@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>contact | dutxubo的博客</title>
-  <meta name="keywords" content="">
-  <meta name="description" content="contact | dutxubo的博客">
+  <title>matplotlib基础 | dutxubo的博客</title>
+  <meta name="keywords" content=" matplotlib ">
+  <meta name="description" content="matplotlib基础 | dutxubo的博客">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="你来到了没有知识的荒原 :(">
 <meta property="og:type" content="website">
@@ -392,19 +392,36 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="contact-" class="article article-type-contact" itemscope itemprop="blogPost">
+        <article id="post-python/常用库/matplotlib/基础概念" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">contact</h1>
+        <h1 class="article-title">matplotlib基础</h1>
     
     <div class="article-meta">
         
         
         
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="python">python</a> > 
+            
+            <a  data-rel="python&lt;---&gt;matplotlib">matplotlib</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color1">matplotlib</a>
+            
+        </span>
         
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2021-01-28 22:54:05'>2021-01-28 22:53</time>
+            发布时间 : <time class="date" title='最后更新: 2021-01-29 15:37:48'>2021-01-29 11:43</time>
         
     </div>
     <div class="article-meta">
@@ -426,7 +443,7 @@
     
     <div class="toc-ref">
     
-        
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5"><span class="toc-text">一、基础概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E7%94%BB%E5%B8%83figure"><span class="toc-text">二、画布figure</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E7%94%BB%E5%B8%83"><span class="toc-text">创建画布</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#plt-figure%E5%88%9B%E5%BB%BA"><span class="toc-text">plt.figure创建</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#plt-subplots%E5%90%8C%E6%97%B6%E5%88%9B%E5%BB%BAfigure%E5%92%8Caxes"><span class="toc-text">plt.subplots同时创建figure和axes</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9A%90%E5%BC%8F%E7%9A%84%E5%88%9B%E5%BB%BAfigure"><span class="toc-text">隐式的创建figure</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8%E7%94%BB%E5%B8%83%E4%B8%8A%E6%96%B0%E5%A2%9Eaxes"><span class="toc-text">在画布上新增axes</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E5%BD%93%E5%89%8D%E7%94%BB%E5%B8%83%E6%88%96axes"><span class="toc-text">获取当前画布或axes</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%9D%E5%AD%98%E7%94%BB%E5%B8%83"><span class="toc-text">保存画布</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B8%85%E9%99%A4%E7%94%BB%E5%B8%83%E6%88%96axes"><span class="toc-text">清除画布或axes</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%BB%E5%B8%83%E8%BD%AC%E5%8C%96%E6%88%90numpy"><span class="toc-text">画布转化成numpy</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -442,7 +459,66 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h2 id="一、基础概念"><a href="#一、基础概念" class="headerlink" title="一、基础概念"></a>一、基础概念</h2><p>想深入了解matplotlib，首先需要了解两个概念：</p>
+<ul>
+<li>figure:画图板/画布，所有的操作未明确指定画布则<strong>默认在最近的</strong>figure上进行操作</li>
+<li>axes：图形区/绘图区，用来绘图的实际区域，一个画布上可以创建一个或多个绘图区。可以直接设定pyplot.axes([x, y, w, h])，更一般的方式是通过subplot来获取绘图区</li>
+</ul>
+<h2 id="二、画布figure"><a href="#二、画布figure" class="headerlink" title="二、画布figure"></a>二、画布figure</h2><h3 id="创建画布"><a href="#创建画布" class="headerlink" title="创建画布"></a>创建画布</h3><h4 id="plt-figure创建"><a href="#plt-figure创建" class="headerlink" title="plt.figure创建"></a>plt.figure创建</h4><ul>
+<li>num指定画布的标号，不指定的话plt会默认增量式的新建一个画布</li>
+<li>figsize指定画布的大小, 但是还没创建axes</li>
+</ul>
+<pre><code class="python">import matplotlib.pyplot as plt
+fig = plt.figure(num=1, figsize=(5,5)) 
+</code></pre>
+<h4 id="plt-subplots同时创建figure和axes"><a href="#plt-subplots同时创建figure和axes" class="headerlink" title="plt.subplots同时创建figure和axes"></a>plt.subplots同时创建figure和axes</h4><pre><code class="python">fig, axes = plt.subplots(1,2) # 创建了axes维度
+axes[0].plot([1,2,3,4])
+axes[0].set_title(&#39;test1&#39;)
+axes[1].plot([4,3,2,1])
+axes[1].set_title(&#39;test2&#39;)
+</code></pre>
+<h4 id="隐式的创建figure"><a href="#隐式的创建figure" class="headerlink" title="隐式的创建figure"></a>隐式的创建figure</h4><p>如果之前未创建figure, 直接运行<code>plt.plot</code>或者 <code>plt.subplot</code>会先隐式的创建一个figure.</p>
+<pre><code class="python">ax1 = plt.subplot(111) #为当前figure创建一个axes，默认为plt.subplot(111)
+ax1.plot([1,2,3,4])
+
+plt.plot([1,2,3,4]) #也可以直接plt.plot,相当于上面两句话
+</code></pre>
+<h3 id="在画布上新增axes"><a href="#在画布上新增axes" class="headerlink" title="在画布上新增axes"></a>在画布上新增axes</h3><pre><code class="python"># 方式一
+fig.add_subplot(122)
+
+# 方式二
+plt.subplot(122)
+</code></pre>
+<h3 id="获取当前画布或axes"><a href="#获取当前画布或axes" class="headerlink" title="获取当前画布或axes"></a>获取当前画布或axes</h3><pre><code class="python"># 获取当前figure，若不存在，创建一个新figure
+fig = plt.gcf() 
+
+# 获取当前axes
+plt.gca() 
+
+# 根据axes获取画布
+fig = ax.figure
+</code></pre>
+<h3 id="保存画布"><a href="#保存画布" class="headerlink" title="保存画布"></a>保存画布</h3><pre><code class="python">fig.savefig(&#39;a.jpg&#39;, dpi=100, bbox_inches=&#39;tight&#39;, progressive=True)
+</code></pre>
+<h3 id="清除画布或axes"><a href="#清除画布或axes" class="headerlink" title="清除画布或axes"></a>清除画布或axes</h3><pre><code class="python">
+ # 清除axes，即当前 figure 中的活动的axes，但其他axes保持不变  
+plt.cla()  
+
+# 清除当前 figure 的所有axes，但是不关闭这个 window，所以能继续复用于其他的 plot
+plt.clf()     
+
+# 关闭 window，如果没有指定，则指当前 window  
+plt.close()    
+</code></pre>
+<h3 id="画布转化成numpy"><a href="#画布转化成numpy" class="headerlink" title="画布转化成numpy"></a>画布转化成numpy</h3><pre><code class="python">def plt2cv(fig):
+    canvas = fig.canvas
+    s, (width, height) = canvas.print_to_buffer()
+    img = Image.frombytes(&quot;RGB&quot;, (width, height), s)
+    img = np.asarray(img, dtype=np.uint8)
+    # img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    return img
+</code></pre>
+
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 jaytp@qq.com </span>
     </div>
