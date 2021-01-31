@@ -114,7 +114,7 @@
     <li>
         <div class="all active" data-rel="全部文章">全部文章
             
-                <small>(5)</small>
+                <small>(8)</small>
             
         </div>
     </li>
@@ -172,16 +172,32 @@
     
         
             
+        
+    
+        
+            
                 <li>
                     <div data-rel="python">
                         <i class="fold iconfont icon-right"></i>
                         
                         python
-                        <small>(2)</small>
+                        <small>(4)</small>
                         
                     </div>
                     
                         <ul class="sub hide">
+                            
+                                <li>
+                                    <div data-rel="python<--->标准库">
+                                        
+                                        标准库
+                                        
+                                            <small>(2
+                                                )</small>
+                                        
+                                    </div>
+                                    
+                                </li>
                             
                                 <li>
                                     <div data-rel="python<--->matplotlib">
@@ -239,8 +255,8 @@
         
     </div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="5">
-
+<input type="hidden" id="yelog_site_posts_number" value="8">
+<input type="hidden" id="yelog_site_word_count" value="3.2k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -302,6 +318,10 @@
             </li>
         
             <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>python</a>
+            </li>
+        
+            <li class="article-tag-list-item">
                 <i class="iconfont icon-tag"></i><a>sql</a>
             </li>
         
@@ -315,6 +335,30 @@
 
     
     <nav id="title-list-nav">
+        
+        <a  class="全部文章 python 标准库 "
+           href="/2021/01/31/python/biao-zhun-ku/tempfile-lin-shi-wen-jian-he-mu-lu/"
+           data-tag="python"
+           data-author="" >
+            <span class="post-title" title="tempfile临时文件和目录">tempfile临时文件和目录</span>
+            <span class="post-date" title="2021-01-31 16:06:56">2021/01/31</span>
+        </a>
+        
+        <a  class="全部文章 python 标准库 "
+           href="/2021/01/31/python/biao-zhun-ku/biao-zhun-ku-yi-lan/"
+           data-tag="python"
+           data-author="" >
+            <span class="post-title" title="python标准库预览">python标准库预览</span>
+            <span class="post-date" title="2021-01-31 16:01:36">2021/01/31</span>
+        </a>
+        
+        <a  class="全部文章 "
+           href="/2021/01/29/linux/chang-jian-wen-ti-shou-lu/kong-jian-bu-zu/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title=""></span>
+            <span class="post-date" title="2021-01-29 21:52:00">2021/01/29</span>
+        </a>
         
         <a  class="全部文章 sql "
            href="/2021/01/29/sql/ji-chu-yu-fa/"
@@ -402,10 +446,12 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2021-01-29 15:37:48'>2021-01-29 11:43</time>
+            发布时间 : <time class="date" title='最后更新: 2021-01-31 16:33:39'>2021-01-29 11:43</time>
         
     </div>
     <div class="article-meta">
+        
+        <span>字数:557</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -440,7 +486,30 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一、基础概念"><a href="#一、基础概念" class="headerlink" title="一、基础概念"></a>一、基础概念</h2><p>想深入了解matplotlib，首先需要了解两个概念：</p>
+        <!-- TOC -->
+
+<ul>
+<li><a href="#%E4%B8%80%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5">一、基础概念</a></li>
+<li><a href="#%E4%BA%8C%E7%94%BB%E5%B8%83figure">二、画布figure</a><ul>
+<li><a href="#%E5%88%9B%E5%BB%BA%E7%94%BB%E5%B8%83">创建画布</a><ul>
+<li><a href="#pltfigure%E5%88%9B%E5%BB%BA">plt.figure创建</a></li>
+<li><a href="#pltsubplots%E5%90%8C%E6%97%B6%E5%88%9B%E5%BB%BAfigure%E5%92%8Caxes">plt.subplots同时创建figure和axes</a></li>
+<li><a href="#%E9%9A%90%E5%BC%8F%E7%9A%84%E5%88%9B%E5%BB%BAfigure">隐式的创建figure</a></li>
+</ul>
+</li>
+<li><a href="#%E5%9C%A8%E7%94%BB%E5%B8%83%E4%B8%8A%E6%96%B0%E5%A2%9Eaxes">在画布上新增axes</a></li>
+<li><a href="#%E8%8E%B7%E5%8F%96%E5%BD%93%E5%89%8D%E7%94%BB%E5%B8%83%E6%88%96axes">获取当前画布或axes</a></li>
+<li><a href="#%E4%BF%9D%E5%AD%98%E7%94%BB%E5%B8%83">保存画布</a></li>
+<li><a href="#%E6%B8%85%E9%99%A4%E7%94%BB%E5%B8%83%E6%88%96axes">清除画布或axes</a></li>
+<li><a href="#%E7%94%BB%E5%B8%83%E8%BD%AC%E5%8C%96%E6%88%90numpy">画布转化成numpy</a></li>
+</ul>
+</li>
+</ul>
+<!-- /TOC -->
+
+
+
+<h2 id="一、基础概念"><a href="#一、基础概念" class="headerlink" title="一、基础概念"></a>一、基础概念</h2><p>想深入了解matplotlib，首先需要了解两个概念：</p>
 <ul>
 <li>figure:画图板/画布，所有的操作未明确指定画布则<strong>默认在最近的</strong>figure上进行操作</li>
 <li>axes：图形区/绘图区，用来绘图的实际区域，一个画布上可以创建一个或多个绘图区。可以直接设定pyplot.axes([x, y, w, h])，更一般的方式是通过subplot来获取绘图区</li>
