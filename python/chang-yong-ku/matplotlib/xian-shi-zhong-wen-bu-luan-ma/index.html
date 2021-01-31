@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>contact | dutxubo的博客</title>
-  <meta name="keywords" content="">
-  <meta name="description" content="contact | dutxubo的博客">
+  <title>matplotlib显示中文不乱码 | dutxubo的博客</title>
+  <meta name="keywords" content=" matplotlib ">
+  <meta name="description" content="matplotlib显示中文不乱码 | dutxubo的博客">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="你来到了没有知识的荒原 :(">
 <meta property="og:type" content="website">
@@ -472,24 +472,41 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="contact-" class="article article-type-contact" itemscope itemprop="blogPost">
+        <article id="post-python/常用库/matplotlib/显示中文不乱码" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">contact</h1>
+        <h1 class="article-title">matplotlib显示中文不乱码</h1>
     
     <div class="article-meta">
         
         
         
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="python">python</a> > 
+            
+            <a  data-rel="python&lt;---&gt;matplotlib">matplotlib</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color1">matplotlib</a>
+            
+        </span>
         
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2021-01-28 22:54:05'>2021-01-28 22:53</time>
+            发布时间 : <time class="date" title='最后更新: 2021-01-31 16:33:49'>2021-01-28 22:31</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:0</span>
+        <span>字数:251</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -508,7 +525,7 @@
     
     <div class="toc-ref">
     
-        
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0"><span class="toc-text">问题描述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-text">解决方案</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -524,7 +541,62 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <!-- TOC -->
+
+<ul>
+<li><a href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0">问题描述</a></li>
+<li><a href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88">解决方案</a></li>
+</ul>
+<!-- /TOC -->
+
+
+<blockquote>
+<p>参考： <a target="_blank" rel="noopener" href="https://www.pythonf.cn/read/105619">https://www.pythonf.cn/read/105619</a></p>
+</blockquote>
+<h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><pre><code>import matplotlib.pyplot as plt
+import matplotlib
+
+matplotlib.rcParams[&#39;font.sans-serif&#39;] = [&#39;SimHei&#39;] #用来正常显示中文标签
+matplotlib.rcParams[&#39;axes.unicode_minus&#39;] = False  #用来正常显示负号
+</code></pre>
+<p>使用matplotlib画图，在Windows下正常，在linux环境下中文乱码</p>
+<pre><code class="python">Font family [&#39;sans-serif&#39;] not found.Falling back to DejaVu Sans
+</code></pre>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><ol>
+<li>下载<a target="_blank" rel="noopener" href="https://www.fontpalace.com/font-download/SimHei/">SimHei</a>字体</li>
+<li>将字体放到指定目录下<pre><code class="python">mv ./SIMHEI.TTF ~/anaconda3/lib/env/python38/site-packages/matplotlib/mpl-data/fonts/ttf/
+</code></pre>
+</li>
+<li>删除matplotlib的缓冲目录</li>
+</ol>
+<ul>
+<li>查询matplotlib缓存目录<pre><code class="python"># python 终端获取缓存路径
+import matplotlib
+print(matplotlib.get_cachedir())
+# ~/.cache/matplotlib
+</code></pre>
+</li>
+<li>删除缓存目录</li>
+</ul>
+<pre><code class="sh">rm -rf ~/.cache/matplotlib
+</code></pre>
+<ol start="4">
+<li>修改matplotlibrc文件</li>
+</ol>
+<p>修改后可在matplotlib绘图中显示中文</p>
+<pre><code class="python"># python 终端获取路径
+import matplotlib    
+print(matplotlib.matplotlib_fname())
+# ~/anaconda3/lib/env/python38/site-packages/matplotlib/mpl-data/matplotlibrc
+
+vim ~/anaconda3/lib/env/python38/site-packages/matplotlib/mpl-data/matplotlibrc
+
+# 修改的内容如下
+font.family         : sans-serif      
+font.sans-serif     : SimHei, Bitstream Vera Sans, Lucida Grande, Verdana, Geneva,Lucid, Arial, Helvetica, Avant Garde, sans-serif  
+axes.unicode_minus  : False
+</code></pre>
+
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 jaytp@qq.com </span>
     </div>

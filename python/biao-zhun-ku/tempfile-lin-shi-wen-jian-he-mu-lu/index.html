@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>contact | dutxubo的博客</title>
-  <meta name="keywords" content="">
-  <meta name="description" content="contact | dutxubo的博客">
+  <title>tempfile临时文件和目录 | dutxubo的博客</title>
+  <meta name="keywords" content=" python ">
+  <meta name="description" content="tempfile临时文件和目录 | dutxubo的博客">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="你来到了没有知识的荒原 :(">
 <meta property="og:type" content="website">
@@ -472,24 +472,41 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="contact-" class="article article-type-contact" itemscope itemprop="blogPost">
+        <article id="post-python/标准库/tempfile临时文件和目录" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">contact</h1>
+        <h1 class="article-title">tempfile临时文件和目录</h1>
     
     <div class="article-meta">
         
         
         
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="python">python</a> > 
+            
+            <a  data-rel="python&lt;---&gt;标准库">标准库</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color2">python</a>
+            
+        </span>
         
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2021-01-28 22:54:05'>2021-01-28 22:53</time>
+            发布时间 : <time class="date" title='最后更新: 2021-01-31 17:17:19'>2021-01-31 16:06</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:0</span>
+        <span>字数:66</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -508,7 +525,7 @@
     
     <div class="toc-ref">
     
-        
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%9F%E6%88%90%E4%B8%B4%E6%97%B6%E7%9B%AE%E5%BD%95"><span class="toc-text">生成临时目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%9F%E6%88%90%E4%B8%B4%E6%97%B6%E6%96%87%E4%BB%B6"><span class="toc-text">生成临时文件</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -524,7 +541,18 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h2 id="生成临时目录"><a href="#生成临时目录" class="headerlink" title="生成临时目录"></a>生成临时目录</h2><pre><code class="python">import tempfile
+
+# 程序运行结束后会自动清空tmp_dir,不需要手动清空
+with tempfile.TemporaryDirectory() as tmp_dir:
+    tmp_file = os.path.join(tmp_dir, &#39;1.txt&#39;)
+</code></pre>
+<h2 id="生成临时文件"><a href="#生成临时文件" class="headerlink" title="生成临时文件"></a>生成临时文件</h2><pre><code class="python">with tempfile.TemporaryFile() as fp:
+    fp.write(b&#39;Hello world!&#39;)
+    fp.seek(0)
+    print(fp.read())
+</code></pre>
+
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 jaytp@qq.com </span>
     </div>
