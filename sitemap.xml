@@ -2,14 +2,14 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://dutxubo.github.io/google180f97f51e406b66.html</loc>
+    <loc>https://dutxubo.github.io/shen-du-xue-xi/kuang-jia/readme/</loc>
     
-    <lastmod>2021-10-28</lastmod>
+    <lastmod>2021-10-31</lastmod>
     
   </url>
   
   <url>
-    <loc>https://dutxubo.github.io/hello/</loc>
+    <loc>https://dutxubo.github.io/google180f97f51e406b66.html</loc>
     
     <lastmod>2021-10-28</lastmod>
     
@@ -67,7 +67,7 @@
 
   
   <url>
-    <loc>https://dutxubo.github.io/tags/test/</loc>
+    <loc>https://dutxubo.github.io/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/</loc>
     <lastmod>2021-10-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -76,7 +76,14 @@
 
   
   <url>
-    <loc>https://dutxubo.github.io/categories/test/</loc>
+    <loc>https://dutxubo.github.io/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/</loc>
+    <lastmod>2021-10-31</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://dutxubo.github.io/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%A1%86%E6%9E%B6/</loc>
     <lastmod>2021-10-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
