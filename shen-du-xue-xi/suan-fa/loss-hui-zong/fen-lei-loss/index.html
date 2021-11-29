@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>分类loss汇总 - dutxubo的博客</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="dutxubo的博客"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="dutxubo的博客"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="分类loss是最常接触到的loss，分类、检测、分割等多种任务都需要使用到分类loss。本文汇总一些常见的分类loss。"><meta property="og:type" content="blog"><meta property="og:title" content="分类loss汇总"><meta property="og:url" content="https://dutxubo.github.io/shen-du-xue-xi/suan-fa/loss-hui-zong/fen-lei-loss/"><meta property="og:site_name" content="dutxubo的博客"><meta property="og:description" content="分类loss是最常接触到的loss，分类、检测、分割等多种任务都需要使用到分类loss。本文汇总一些常见的分类loss。"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://dutxubo.github.io/shen-du-xue-xi/suan-fa/loss-hui-zong/fen-lei-loss/2021-11-09-15-36-06.png"><meta property="og:image" content="https://dutxubo.github.io/shen-du-xue-xi/suan-fa/loss-hui-zong/fen-lei-loss/2021-11-11-10-37-34.png"><meta property="og:image" content="https://dutxubo.github.io/shen-du-xue-xi/suan-fa/loss-hui-zong/fen-lei-loss/2021-11-11-15-23-38.png"><meta property="og:image" content="https://dutxubo.github.io/shen-du-xue-xi/suan-fa/loss-hui-zong/fen-lei-loss/2021-11-11-15-25-58.png"><meta property="og:image" content="https://dutxubo.github.io/shen-du-xue-xi/suan-fa/loss-hui-zong/fen-lei-loss/2021-11-15-00-31-39.png"><meta property="article:published_time" content="2021-11-09T03:06:35.093Z"><meta property="article:modified_time" content="2021-11-22T15:49:33.728Z"><meta property="article:author" content="xubo"><meta property="article:tag" content="loss"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/shen-du-xue-xi/suan-fa/loss-hui-zong/fen-lei-loss/2021-11-09-15-36-06.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://dutxubo.github.io/shen-du-xue-xi/suan-fa/loss-hui-zong/fen-lei-loss/"},"headline":"分类loss汇总","image":["https://dutxubo.github.io/shen-du-xue-xi/suan-fa/loss-hui-zong/fen-lei-loss/2021-11-09-15-36-06.png","https://dutxubo.github.io/shen-du-xue-xi/suan-fa/loss-hui-zong/fen-lei-loss/2021-11-11-10-37-34.png","https://dutxubo.github.io/shen-du-xue-xi/suan-fa/loss-hui-zong/fen-lei-loss/2021-11-11-15-23-38.png","https://dutxubo.github.io/shen-du-xue-xi/suan-fa/loss-hui-zong/fen-lei-loss/2021-11-11-15-25-58.png","https://dutxubo.github.io/shen-du-xue-xi/suan-fa/loss-hui-zong/fen-lei-loss/2021-11-15-00-31-39.png"],"datePublished":"2021-11-09T03:06:35.093Z","dateModified":"2021-11-22T15:49:33.728Z","author":{"@type":"Person","name":"xubo"},"publisher":{"@type":"Organization","name":"dutxubo的博客","logo":{"@type":"ImageObject","url":{"text":"My Beautiful Site"}}},"description":"分类loss是最常接触到的loss，分类、检测、分割等多种任务都需要使用到分类loss。本文汇总一些常见的分类loss。"}</script><link rel="canonical" href="https://dutxubo.github.io/shen-du-xue-xi/suan-fa/loss-hui-zong/fen-lei-loss/"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script><!--!--><!--!--><meta name="generator" content="Hexo 5.3.0"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">My Beautiful Site</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">主页</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" href="/about">关于</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="My GitHub" href="https://github.com/dutxubo/"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2021-11-09T03:06:35.093Z" title="2021/11/9 上午11:06:35">2021-11-09</time>发表</span><span class="level-item"><time dateTime="2021-11-22T15:49:33.728Z" title="2021/11/22 下午11:49:33">2021-11-22</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a><span> / </span><a class="link-muted" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%AE%97%E6%B3%95/">算法</a><span> / </span><a class="link-muted" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%AE%97%E6%B3%95/loss/">loss</a></span><span class="level-item">20 分钟读完 (大约3026个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">分类loss汇总</h1><div class="content"><p>分类loss是最常接触到的loss，分类、检测、分割等多种任务都需要使用到分类loss。本文汇总一些常见的分类loss。</p>
+<a id="more"></a>
+
+<h2 id="Cross-Entropy"><a href="#Cross-Entropy" class="headerlink" title="Cross Entropy"></a>Cross Entropy</h2><p>无需多言，最经典的分类loss。</p>
+<p>二分类交叉熵:<br>$$L=-(ylog(\hat{y})+(1-y)log(1-\hat{y}))$$    </p>
+<p>多分类交叉熵:<br>$$L=-\sum_{j=1}^{K}y^{(j)}log(\hat{y}^{(j)})$$   </p>
+<p>其中$y$是标签，$\hat{y}$是预测的概率值,$K$是类别数</p>
+<h2 id="Weighted-Cross-Entropy"><a href="#Weighted-Cross-Entropy" class="headerlink" title="Weighted Cross-Entropy"></a>Weighted Cross-Entropy</h2><p>对于样本不平衡的问题，上述交叉熵损失很容易对样本多的类目过学习，而对样本少的类目欠学习。</p>
+<p>为了缓解样本不平衡问题，可以对不同类目进行加权</p>
+<p>二分类加权交叉熵:<br> $$L=-(\beta ylog(\hat{y})+(1-\beta)(1-y)log(1-\hat{y}))$$</p>
+<p>多分类加权交叉熵:<br>$$L=-\sum_{j=1}^{K}w_j y^{(j)}log(\hat{y}^{(j)})$$</p>
+<p><font color=red>问题：权重如何设置呢？</font></p>
+<ul>
+<li>直观的想法是基于样本比例手动设置加权比例</li>
+<li>更进一步是基于训练中的统计信息自适应加权</li>
+</ul>
+<h2 id="Focal-Loss"><a href="#Focal-Loss" class="headerlink" title="Focal Loss"></a>Focal Loss</h2><blockquote>
+<p>paper: Focal Loss for Dense Object Detection. 2017</p>
+</blockquote>
+<p>加权交叉熵只是考虑类别不平衡，在同一类别中还需要考虑样本之间的难易程度，focal loss的目的就是关注<strong>难例样本(给难分类的样本较大权重)</strong></p>
+<p>二分类形式:<br>$$L=-(\alpha(1-p)^{\gamma} plog(\hat{p})+(1-\alpha)p^{\gamma}(1-p)log(1-\hat{p}))$$<br>多分类形式：<br>$$L=-\sum_{i=1}^{K}\alpha_{i}(1-p)^{\gamma} plog(\hat{p})$$</p>
+<p><font color=red>问题：$\alpha$和$\gamma$如何设置呢？</font></p>
+<ul>
+<li>$\alpha$是用来解决样本不均衡。通俗的说，某类的样本数越少，$\alpha$的值越大</li>
+<li>$\gamma$是用来平衡难、易训练样本的系数。$\gamma$越大，难样本loss得到的倾斜比例约大</li>
+<li>总的来说，依然需要依靠经验手动调节$\alpha$和$\gamma$。对于$\gamma$，作者的经验值是2；对于$\alpha$，需要配合$\gamma$调整</li>
+</ul>
+<h2 id="GHM"><a href="#GHM" class="headerlink" title="GHM"></a>GHM</h2><blockquote>
+<p>paper: Gradient Harmonized Single-stage Detector.AAAI 2019</p>
+</blockquote>
+<p>focal loss对难样本会重点学习，但现实情况往往会出现<font color=red><strong>离群点</strong></font>（错标，漏标，污损等），对于这些离群点重点学习显然是不合适的</p>
+<p><font color=green>那么如何区分难样本和离群点呢？</font> 如下第一个子图所示，当<strong>模型接近收敛时</strong>，绝大部分样本的梯度很小，属于易分样本；一部分样本的梯度接近于1，并且数量不算少，GHM认为这批始终稳定存在的梯度特别大的样本，属于离群点。</p>
+<p>由子图1推理出可以利用梯度密度来自适应对样本加权，既抑制梯度极端小的易样本，又抑制梯度极端大的离群点，同时避免了focal loss需要手动设置$\alpha$和$\gamma$的缺点。子图2为实现的加权函数。</p>
+<p><img src="/shen-du-xue-xi/suan-fa/loss-hui-zong/fen-lei-loss/2021-11-09-15-36-06.png"></p>
+<p>现在的问题转为<font color=green>梯度密度的计算</font>：</p>
+<p>使用交叉熵损失函数时，一个样本的梯度的模为</p>
+<p>$$<br>g=|p-p^*|=<br>\begin{cases}<br>1-p, &amp; p^*=1,\<br>p, &amp; p^*=0<br>\end{cases}<br>$$</p>
+<p>计算梯度密度时，为了快速计算，直接划分10个bins，以每个bins的倒数作为权值加权</p>
+<details>
+<summary>简化代码</summary>
+
+<pre><code class="python"># https://github.com/open-mmlab/mmdetection/blob/master/mmdet/models/losses/ghm_loss.py
+class GHMC(nn.Module):
+    def __init__(self, bins=10, ......):
+        self.bins = bins
+        # tensor([0.0000, 0.1000, 0.2000, 0.3000, 0.4000, 
+                  0.5000, 0.6000, 0.7000, 0.8000,0.9000, 1.0000])
+        self.edges = torch.arange(bins + 1).float() / bins
+        self.edges[-1] += 1e-6
+
+    def forward(self, pred, target):
+        weights = torch.zeros_like(pred)
+        tot = len(pred)
+        g = torch.abs(pred.sigmoid().detach() - target) # 计算梯度模长
+        n = 0  # 有效的区间数
+        # 通过循环计算落入10个bins的梯度模长数量
+        for i in range(self.bins):
+            inds = (g &gt;= self.edges[i]) &amp; (g &lt; self.edges[i + 1])
+            num_in_bin = inds.sum().item()
+            if num_in_bin &gt; 0:
+                weights[inds] = tot / num_in_bin # 梯度密度就是1/num_in_bin
+                n += 1
+        if n &gt; 0:
+            weights = weights / n
+
+        loss = torch.nn.functional.binary_cross_entropy_with_logits(
+            pred, target, weights, reduction=&#39;sum&#39;) / tot
+        
+        return loss
+</code></pre>
+</details>
+
+<hr>
+<h2 id="ArcFace-Loss"><a href="#ArcFace-Loss" class="headerlink" title="ArcFace Loss"></a>ArcFace Loss</h2><blockquote>
+<p>paper: ArcFace: Additive Angular Margin Loss for Deep Face Recognition.2019</p>
+</blockquote>
+<p>ArcFace属于人脸识别系列loss，也是当前人脸识别普遍使用的loss。</p>
+<p>首先让我们回顾一下SoftmaxLoss,看看SoftmaxLoss在人脸识别领域的缺陷：</p>
+<p>$$L=-\sum_{j=1}^{K}y^{(j)}log(\hat{y}^{(j)})=-\sum_{j=1}^{K}y^{(j)}log\frac{e^{W^{T}<em>{j}x+b_j}}{\sum_{i=1}^{K}e^{W^{T}</em>{i}x+b_{i}}}$$</p>
+<p>权重$W$将空间划分成K份，通过SoftmaxLoss学习到的特征$x$的2维映射如下，是一个扇形区域：</p>
+<p><img src="/shen-du-xue-xi/suan-fa/loss-hui-zong/fen-lei-loss/2021-11-11-10-37-34.png"> </p>
+<ul>
+<li>对于闭集任务（类别数目固定），Softmax训练的特征和$W$相乘之后，基于其所在的空间区域可以确定类别；    </li>
+<li>对于开集任务（类别数目不固定），我们并不是基于$W$去分类，而是基于样本特征的欧式距离或余弦距离判断样本是否属于同一类。Softmax训练的特征并不能保证类内样本的特征距离更小，类间样本特征距离更大。（如上图<font color=blue>蓝色线</font>和<font color=red>红色线</font>的距离可能比两条红色线的距离要小）</li>
+</ul>
+<p>人脸识别正是一个开集任务，直接利用Softmax学习可能不合适。</p>
+<p>ArcFace首先<font color=red>将$W$和$x$归一化</font>，忽略$b_j$的影响，$W^{T}x$即可以等价为一个$cos\theta$,优化的目标是使类内样本与对应$W_j$夹角小，与其他类的$W_i$夹角大。权值和特征归一化使得CNN更加集中在优化夹角上，从而使得类内特征更聚合，类间特征更可分。最终的ArcFace Loss如下所示:</p>
+<p>$$L=-\sum_{j=1}^{K}y^{(j)}log\frac{e^{s<em>cos(\theta_j+m)}}{e^{s</em>cos(\theta_j+m)}+\sum_{i=1,i\neq j}^{K}e^{s*cos\theta_i}}$$</p>
+<p><font color=red>问题：$s$和$m$是什么，如何设置呢？</font></p>
+<ul>
+<li>s可以视作超球面的半径，半径越大，特征表达的空间相应也更大;实质上就是一个缩放因子，$cos\theta$值很小，对应的梯度也很小，加上一个缩放因子会更好优化。具体取值需要实验分析，取一个大于1的适中的数，<strong>论文给出的值为64</strong></li>
+<li>m是margin参数，作用是让权值向量$W$和特征向量$x$之间的夹角更小，迫使特征向量向$W$方向靠拢，<strong>论文给出的值是0.5</strong></li>
+</ul>
+<p><font color=red>问题：ArcFace理论看起来很棒，可以用在其他非人脸识别任务上吗？</font>理论上可以，但是目前ArcFace只在人脸识别领域广泛使用，在imagenet分类任务（闭集任务）应用比较少；在类似的ReID任务上也基本上没有什么应用，猜测可能是<strong>因为行人有不同的朝向和姿态</strong>，强行将这些差异较大的图像聚集在一个很小的角度内，很难学习的好。</p>
+<p>最后查看ArcFace训练得到的可视化特征，可以看到Softmax是扇形区域，而ArcFace是聚焦在一个角度内。和ArcFace同系列的论文还有CosineFace、SphereFace等，工程实践表明ArcFace有相对更优的结果。</p>
+<table>
+<thead>
+<tr>
+<th>特征可视化</th>
+<th>Loss分界面对比</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><img src="/shen-du-xue-xi/suan-fa/loss-hui-zong/fen-lei-loss/2021-11-11-15-23-38.png"></td>
+<td><img src="/shen-du-xue-xi/suan-fa/loss-hui-zong/fen-lei-loss/2021-11-11-15-25-58.png"></td>
+</tr>
+</tbody></table>
+<details>
+<summary>简化代码</summary>
+
+<pre><code class="python"># https://github.com/deepinsight/insightface/blob/master/recognition/arcface_torch/losses.py
+class ArcFace(nn.Module):
+    def __init__(self, s=64.0, m=0.5):
+        super(ArcFace, self).__init__()
+        self.s = s
+        self.m = m
+
+    def forward(self, cosine: torch.Tensor, label):
+        index = torch.where(label != -1)[0]
+        m_hot = torch.zeros(index.size()[0], cosine.size()[1], device=cosine.device)
+        m_hot.scatter_(1, label[index, None], self.m)
+        cosine.acos_()
+        cosine[index] += m_hot
+        cosine.cos_().mul_(self.s)
+        return cosine
+</code></pre>
+</details>
+
+<hr>
+<h2 id="Circle-Loss"><a href="#Circle-Loss" class="headerlink" title="Circle Loss"></a>Circle Loss</h2><blockquote>
+<p>paper: Circle Loss: A Unified Perspective of Pair Similarity Optimization.2020</p>
+</blockquote>
+<p>Circle Loss和上述介绍的ArcFace Loss类似，其本质不是去做一个纯分类任务（闭集分类），而是去学习到一个好的深度特征，该深度特征既要有小的类内距离，又要有大的类间距离。</p>
+<p>通常有两种方式去学习得到这样的深度特征：</p>
+<ul>
+<li>使用<strong>class-wise</strong>的标签进行分类学习（Softmax，CosFace，etc）</li>
+<li>使用<strong>pair-wise</strong>的标签对比学习（triplet loss，N-Pair loss，etc）</li>
+</ul>
+<p>在此之前，总是将这两种学习方式区别对待，该篇论文则从形式上将上述两种loss统一，并提出改进版的Circle Loss。</p>
+<p><font color=green>直接看统一形式的loss表达</font>：<br>$$L_{uni}=log[1+\sum_{i=1}^{K}\sum_{j=1}^{L}exp(\gamma(s_n^{j}-s_p^{i}+m))]\<br>=log[1+\sum_{j=1}^{L}exp(\gamma(s_n^{j}+m))\sum_{i=1}^{K}exp(\gamma(-s_p^{i}))]$$</p>
+<p>$K$为类内样本数，$L$为类间样本数，$s_p$表示类内样本相似度，$s_n$表示类间样本相似度，</p>
+<p><font color=green>改进后的circle loss（为方便阐述，公示中暂时省略m）</font>：</p>
+<p>$$L_{circle}=log[1+\sum_{i=1}^{K}\sum_{j=1}^{L}exp(\gamma(\alpha_{n}^{j} s_n^{j}-\alpha_p^i s_p^{i}))]\<br>=log[1+\sum_{j=1}^{L}exp(\gamma \alpha_n^j s_n^{j})\sum_{i=1}^{K}exp(-\gamma \alpha_p^i s_p^{i}))]$$</p>
+<p><font color=red>问题一：统一形式的loss如何体现class-wise的分类loss和pair-wise的对比loss</font></p>
+<ul>
+<li>对于class-wise的分类loss，特征$x$和分类层权重$w$的乘积表示相似度得分，此时$K=1$,$L=N-1$,$N$为类别数目</li>
+<li>对于pair-wise的对比loss，$L_{uni}$就是triplet loss的一种通用写法。特别的，当$\gamma\rightarrow\infty$时，$L_{uni}$退化为带hard mining的triplet loss；其他情况可以看着“soft” hard mining的triplet loss</li>
+<li>triplet loss和Softmax loss都是$L_{uni}$的一个特例，具体细节可以查看论文，不在此缀述</li>
+</ul>
+<p><font color=red>问题二：circle loss好像就是添加了$\alpha_p$和$\alpha_n$这两个系数，有什么作用呢</font></p>
+<p>从$L_{uni}$可知，无论是class-wise的分类loss还是pair-wise的对比loss，都是在优化$s_n^{j}-s_p^{i}$这一项，配合下图能够直观的展示这一优化目标有两个问题：</p>
+<ul>
+<li>Lack of flexibility for optimization（优化缺乏灵活性）：当$s_p$很小，$s_n$几乎接近0时，合理的做法是去增大$s_p$，$s_n$保持稳定就好，但$L_{uni}$还是会对$s_n$施加一个较大的梯度惩罚。如（a）图中的A、B、C三个点对$s_p$和$s_n$的梯度是相同的。</li>
+<li>Ambiguous convergence status（收敛状态模糊）：$T$和$T^{‘}$都在收敛边界$s_n-s_p=m$上，但是在$T^{‘}$上$s_n^{j+1}$和$T$上的$s_p^{i}$的距离可能要小于$m$</li>
+</ul>
+<p>$\alpha_p$和$\alpha_n$作为两个调节系数，可以缓解上述两个问题，如图（b）所示：</p>
+<ul>
+<li>优化更灵活：$s_n$很小的时候，$\alpha_n$可以小一点，对$s_n$的惩罚强度也相应小一点，专注去优化增大$s_p$</li>
+<li>圆形收敛状态比斜线的收敛状态有更少的模糊性：$\alpha_n s_n- \alpha_p s_p=m$的边界是一个圆（这也是circle<br>loss的由来）<br><img src="/shen-du-xue-xi/suan-fa/loss-hui-zong/fen-lei-loss/2021-11-15-00-31-39.png"></li>
+</ul>
+<p><font color=red>问题三：和这两个调节系数如何设置呢</font></p>
+<p>$\alpha_p$、$\alpha_n$和$s_p$、$s_n$ 直接相关，论文中给出了一个方便快捷的计算方式</p>
+<p>$$L_{circle}=log[1+\sum_{j=1}^{L}exp(\gamma \alpha_n^j (s_n^{j}-\Delta_n))\sum_{i=1}^{K}exp(-\gamma \alpha_p^i (s_p^{i}-\Delta_p) ))]$$</p>
+<p>$$\begin{cases}<br>\alpha_p^i = [O_p - s_p^i]_+\<br>\alpha_n^j = [s_n^j - O_n]_+<br>\end{cases}<br>$$</p>
+<p>$$O_p=1+m, O_n=-m, \Delta_p=1-m, \Delta_n=m$$</p>
+<p>$\Delta_p$和$\Delta_n$是上文公式中忽略的m参数， $O_p$和$O_n$是$\alpha_p$、$\alpha_n$的理想值，经过简化后，整个circle loss只有两个超参数m和$\gamma$</p>
+<p>实践表明，circle loss在人脸识别和reid等领域中验证均有正向效果，pair-wise + class-wise同时训练对reid可能会有更好的效果</p>
+</div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/loss/">loss</a></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/sql/zheng-ze-pi-pei/"><i class="level-item fas fa-chevron-left"></i><span class="level-item"> </span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/shen-du-xue-xi/gong-cheng/profiler-xing-neng-fen-xi/onnx-profiler/"><span class="level-item">onnx profile性能分析</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div><script>var disqus_config = function () {
+            this.page.url = 'https://dutxubo.github.io/shen-du-xue-xi/suan-fa/loss-hui-zong/fen-lei-loss/';
+            this.page.identifier = 'some-disqus-id';
+        };
+        (function() {
+            var d = document, s = d.createElement('script');  
+            s.src = '//' + 'dutxubo-github-io' + '.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="/./img/nezha.jpeg" alt="dutxubo"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">dutxubo</p><p class="is-size-6 is-block">即将起航的菜鸟</p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">6</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">7</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">4</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/ppoffice" target="_blank" rel="noopener">关注我</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/dutxubo"><i class="fab fa-github"></i></a></div></div></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/sql/"><span class="level-start"><span class="level-item">sql</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"><span class="level-start"><span class="level-item">深度学习</span></span><span class="level-end"><span class="level-item tag">3</span></span></a><ul><li><a class="level is-mobile" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E5%B7%A5%E7%A8%8B/"><span class="level-start"><span class="level-item">工程</span></span><span class="level-end"><span class="level-item tag">1</span></span></a><ul><li><a class="level is-mobile" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E5%B7%A5%E7%A8%8B/profiler%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90/"><span class="level-start"><span class="level-item">profiler性能分析</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%A1%86%E6%9E%B6/"><span class="level-start"><span class="level-item">框架</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%AE%97%E6%B3%95/"><span class="level-start"><span class="level-item">算法</span></span><span class="level-end"><span class="level-item tag">1</span></span></a><ul><li><a class="level is-mobile" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%AE%97%E6%B3%95/loss/"><span class="level-start"><span class="level-item">loss</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></li></ul></li></ul></div></div></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-11-25T07:17:08.086Z">2021-11-25</time></p><p class="title"><a href="/sql/zheng-ze-pi-pei/"> </a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-11-09T03:06:35.093Z">2021-11-09</time></p><p class="title"><a href="/shen-du-xue-xi/suan-fa/loss-hui-zong/fen-lei-loss/">分类loss汇总</a></p><p class="categories"><a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a> / <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%AE%97%E6%B3%95/">算法</a> / <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%AE%97%E6%B3%95/loss/">loss</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/shen-du-xue-xi/gong-cheng/profiler-xing-neng-fen-xi/onnx-profiler/"><img src="/gallery/framework.png" alt="onnx profile性能分析"></a></figure><div class="media-content"><p class="date"><time dateTime="2021-11-06T02:46:30.745Z">2021-11-06</time></p><p class="title"><a href="/shen-du-xue-xi/gong-cheng/profiler-xing-neng-fen-xi/onnx-profiler/">onnx profile性能分析</a></p><p class="categories"><a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a> / <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E5%B7%A5%E7%A8%8B/">工程</a> / <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E5%B7%A5%E7%A8%8B/profiler%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90/">profiler性能分析</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-11-06T01:53:49.294Z">2021-11-06</time></p><p class="title"><a href="/sql/readme/"> </a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/shen-du-xue-xi/kuang-jia/readme/"><img src="/gallery/framework.png" alt="深度学习框架介绍"></a></figure><div class="media-content"><p class="date"><time dateTime="2021-10-31T09:57:51.536Z">2021-10-31</time></p><p class="title"><a href="/shen-du-xue-xi/kuang-jia/readme/">深度学习框架介绍</a></p><p class="categories"><a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a> / <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%A1%86%E6%9E%B6/">框架</a></p></div></article></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">归档</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2021/11/"><span class="level-start"><span class="level-item">十一月 2021</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/10/"><span class="level-start"><span class="level-item">十月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/01/"><span class="level-start"><span class="level-item">一月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/loss/"><span class="tag">loss</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/sql/"><span class="tag">sql</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90/"><span class="tag">性能分析</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/"><span class="tag">效率工具</span><span class="tag">1</span></a></div></div></div></div></div><div class="card widget" data-type="subscribe-email"><div class="card-content"><div class="menu"><h3 class="menu-label">follow.it</h3><form action="" method="post" target="_blank"><div class="field has-addons"><div class="control has-icons-left is-expanded"><input class="input" name="email" type="email" placeholder="Email"><span class="icon is-small is-left"><i class="fas fa-envelope"></i></span></div><div class="control"><input class="button" type="submit" value="订阅"></div></div></form></div></div></div><div class="column-right-shadow is-hidden-widescreen is-sticky"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#Cross-Entropy"><span class="level-left"><span class="level-item">1</span><span class="level-item">Cross Entropy</span></span></a></li><li><a class="level is-mobile" href="#Weighted-Cross-Entropy"><span class="level-left"><span class="level-item">2</span><span class="level-item">Weighted Cross-Entropy</span></span></a></li><li><a class="level is-mobile" href="#Focal-Loss"><span class="level-left"><span class="level-item">3</span><span class="level-item">Focal Loss</span></span></a></li><li><a class="level is-mobile" href="#GHM"><span class="level-left"><span class="level-item">4</span><span class="level-item">GHM</span></span></a></li><li><a class="level is-mobile" href="#ArcFace-Loss"><span class="level-left"><span class="level-item">5</span><span class="level-item">ArcFace Loss</span></span></a></li><li><a class="level is-mobile" href="#Circle-Loss"><span class="level-left"><span class="level-item">6</span><span class="level-item">Circle Loss</span></span></a></li></ul></div></div><script src="/js/toc.js" defer></script></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/">My Beautiful Site</a><p class="is-size-7"><span>&copy; 2021 xubo</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a><br><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p></div><div class="level-end"></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-CN");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'folded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "此网站使用Cookie来改善您的体验。",
+          dismiss: "知道了！",
+          allow: "允许使用Cookie",
+          deny: "拒绝",
+          link: "了解更多",
+          policy: "Cookie政策",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script type="text/x-mathjax-config">MathJax.Hub.Config({
+            'HTML-CSS': {
+                matchFontHeight: false
+            },
+            SVG: {
+                matchFontHeight: false
+            },
+            CommonHTML: {
+                matchFontHeight: false
+            },
+            tex2jax: {
+                inlineMath: [
+                    ['$','$'],
+                    ['\\(','\\)']
+                ]
+            }
+        });</script><script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>
